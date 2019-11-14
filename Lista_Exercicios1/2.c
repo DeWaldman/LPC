@@ -1,0 +1,12 @@
+#include <stdio.h>
+
+int main(){
+  int n, soma, i;
+  soma = 0;
+  scanf("%d", &n);
+  for(i=1; i<=n; i++){
+    soma+=i;
+  }
+  printf("%d\n", soma);
+  return 0;
+}
