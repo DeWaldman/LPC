@@ -2,9 +2,11 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define day(a,b) (a+b)%30 == 0 ? 1: (a+b)%30 
+#define day(a) (a)%30 == 0 ? 1 : (a)%30 
+#define mon(a) (a)%12 == 0 ? 1 : (a)%12
 
-//-------------------------------------------
+
+//----------------------------------------------------------------------------------
 typedef struct{
   int dia;
   int mes;
@@ -17,7 +19,7 @@ typedef struct{
 }hm;
 
 
-//--------------------------------------------
+//------------------------------------------------------------------------------------
 dma fim_evento (dma datainicio, int n_dias){
   dma datafim;
   if(n_dias == 0){
@@ -27,18 +29,22 @@ dma fim_evento (dma datainicio, int n_dias){
     return datafim;
   }
   else{
-    datafim.dia = day(datainicio.dia, n_dias);
-    datafim.mes = datainicio.mes;
-    datafim.ano = datainicio.ano;
-    if(datafim.dia == 1){//virou o mes
-      datafim.mes++;
-      if( datafim.mes == 13){//virou o ano
-        datafim.mes=1;
-        datafim.ano++;
+    int dias=datainicio.dia, meses=datainicio.mes, anos=datainicio.ano;    
+    dias = datainicio.dia + n_dias;
+    if(dias > 30){
+      meses = datainicio.mes + (dias/30);
+      dias = day(dias);
+      if(meses > 12){
+        anos = datainicio.ano + (meses/12);
+        meses = mon(meses);
       }
     }
-    return datafim;
+    datafim.dia = dias;
+    datafim.mes = meses;
+    datafim.ano = anos;
+
   }
+  return datafim;
 }
 
 
@@ -64,15 +70,16 @@ hm time(int temp_min){
 }
 
 
-//------------------------------------------------
+//-------------------------------------------------------------------------------
 int main(){
   dma x, y;
-  int n_d = 1;
+  int n_d = 60;
+
   y.dia = 1;
   y.mes = 1;
   y.ano = 1;
 
-  x.dia = 1;
+  x.dia = 29;
   x.mes = 1;
   x.ano = 1;
 
