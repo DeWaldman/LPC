@@ -1,14 +1,15 @@
-<h3>
+<h4>
 <code>
 <pre>
 
-int n = 5;
-int *p = &n;
-
-p == &n;
-*&p == &n
-**&p == n
-
+Se 
+   int n = 5; 
+   int *p = &n;
+Entao
+  p == &n
+  *&p == &n
+  **&p == n
+  *p == n
 </pre>
 </code>
-</h3>
+</h4>
